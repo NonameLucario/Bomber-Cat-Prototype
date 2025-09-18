@@ -57,31 +57,23 @@ public class DarkBox : MonoBehaviour
         //    }
         //}
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
         //Instantiate(ExplosionFVX, transform.position, Quaternion.identity);
 
 
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    MessageManager.instance.SendMsg(gameObject.name, $"{collision.gameObject.name}.layer = {collision.gameObject.layer}");
-    //    switch (collision.gameObject.layer)
-    //    {
-    //        case 0: //default
-    //            Explode();
-    //            break;
+    private void OnCollisionEnter(Collision collision)
+    {
+        //MessageManager.instance.SendMsg(gameObject.name, $"{collision.gameObject.name}.layer = {collision.gameObject.layer}");
+        switch (collision.gameObject.layer)
+        {
+            case 0: //default
+                //Explode();
+                break;
 
-    //        case 6: //grounded
-    //            Explode();
-    //            break;
-
-    //        case 7: //interact
-    //            Explode();
-    //            break;
-
-    //        default:
-    //            break;
-    //    }
-    //}
+            default:
+                break;
+        }
+    }
 }
