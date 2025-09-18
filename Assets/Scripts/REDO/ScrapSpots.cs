@@ -11,6 +11,6 @@ public class ScrapSpots : Interactable
     public override void Interact()
     {
         EventManager.Instance.OnAddScarp?.Invoke(10);
-        MessageManager.instance.SendMsg("", "<i>You Pick Up 10 Scrap</i>");
+        //MessageManager.instance.SendMsg("", "<i>You Pick Up 10 Scrap</i>");
     }
 }

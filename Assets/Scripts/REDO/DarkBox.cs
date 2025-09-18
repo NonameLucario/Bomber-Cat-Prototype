@@ -48,40 +48,40 @@ public class DarkBox : MonoBehaviour
 
         }
 
-        foreach (var item in overlappedColliders)
-        {
-            if (item.CompareTag("Grounded"))
-            {
-                Vector3 pos = item.ClosestPointOnBounds(transform.position);
-                //Instantiate(AfterExplosionDecal, pos, Quaternion.Euler(-90, Random.Range(-90, 90), 0));
-            }
-        }
+        //foreach (var item in overlappedColliders)
+        //{
+        //    if (item.CompareTag("Grounded"))
+        //    {
+        //        Vector3 pos = item.ClosestPointOnBounds(transform.position);
+        //        //Instantiate(AfterExplosionDecal, pos, Quaternion.Euler(-90, Random.Range(-90, 90), 0));
+        //    }
+        //}
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
         //Instantiate(ExplosionFVX, transform.position, Quaternion.identity);
 
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        MessageManager.instance.SendMsg(gameObject.name, $"{collision.gameObject.name}.layer = {collision.gameObject.layer}");
-        switch (collision.gameObject.layer)
-        {
-            case 0: //default
-                Explode();
-                break;
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    MessageManager.instance.SendMsg(gameObject.name, $"{collision.gameObject.name}.layer = {collision.gameObject.layer}");
+    //    switch (collision.gameObject.layer)
+    //    {
+    //        case 0: //default
+    //            Explode();
+    //            break;
 
-            case 6: //grounded
-                Explode();
-                break;
+    //        case 6: //grounded
+    //            Explode();
+    //            break;
 
-            case 7: //interact
-                Explode();
-                break;
+    //        case 7: //interact
+    //            Explode();
+    //            break;
 
-            default:
-                break;
-        }
-    }
+    //        default:
+    //            break;
+    //    }
+    //}
 }
