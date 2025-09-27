@@ -37,6 +37,8 @@ public class PlayerMove : MonoBehaviour
     private float verticalVelocity;
     private float targetHeight;
 
+    [SerializeField] private LayerMask SlideLayer;
+
 
     private void Start()
     {
@@ -52,7 +54,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = characterController.isGrounded;
+        isGrounded = ProcessGrounded();
         jumpBufferTime -= Time.deltaTime;
 
 
@@ -62,6 +64,33 @@ public class PlayerMove : MonoBehaviour
         ProcessCrouchTransition();
 
         
+    }
+
+    private bool ProcessGrounded()
+    {
+        bool flag = false;
+
+        flag = characterController.isGrounded;
+        
+        //if(Physics.CapsuleCast(
+        //    transform.position, transform.position + (Vector3.up * 0.1f),
+        //    characterController.radius, Vector3.down, 0.1f, SlideLayer
+        //)) flag = false;
+
+        //UIManager.Instance.devSlideGrounded = Physics.CapsuleCast(
+        //    transform.position, transform.position + (Vector3.up * 1f),
+        //    characterController.radius, Vector3.down, 0.1f, SlideLayer
+        //);
+
+
+        bool flag2 = Physics.CheckSphere(transform.position, characterController.radius, SlideLayer);
+        if (flag2)
+        {
+            flag = false;
+        }
+        UIManager.Instance.devSlideGrounded = flag2;
+        UIManager.Instance.devGrounded = flag;
+        return flag;
     }
 
     private void FixedUpdate()
