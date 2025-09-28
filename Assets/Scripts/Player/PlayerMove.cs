@@ -38,7 +38,8 @@ public class PlayerMove : MonoBehaviour
     private float targetHeight;
 
     [SerializeField] private LayerMask SlideLayer;
-
+    [SerializeField] private LayerMask GroundedLayer;
+    [SerializeField] private bool isCanWallJump;
 
     private void Start()
     {
@@ -90,6 +91,7 @@ public class PlayerMove : MonoBehaviour
         }
         UIManager.Instance.devSlideGrounded = flag2;
         UIManager.Instance.devGrounded = flag;
+        if (flag) { isCanWallJump = true; }
         return flag;
     }
 
@@ -126,7 +128,7 @@ public class PlayerMove : MonoBehaviour
     private void Jump()
     {
         jumpBufferTime = jumpBufferMaxTime;
-        
+        if (!isGrounded && CanWallJump()) verticalVelocity = jumpForce;
     }
 
     private void TryJumpWithBufferTime()
@@ -206,5 +208,14 @@ public class PlayerMove : MonoBehaviour
         float pushPower = 2.0F;
         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         hit.rigidbody.linearVelocity = pushDir * pushPower;
+    }
+
+    private bool CanWallJump()
+    {
+        if (!isCanWallJump) return false;
+        Ray ray = new Ray(transform.position, transform.forward);
+        bool flag = Physics.SphereCast(ray, characterController.radius, 1f, GroundedLayer);
+        isCanWallJump = false;
+        return flag;
     }
 }
