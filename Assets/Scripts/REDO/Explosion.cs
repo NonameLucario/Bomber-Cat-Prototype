@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// тоже самое что и darkbox.cs
 public class Explosion : MonoBehaviour
 {
     [SerializeField] private GameObject ExplosionFVX;

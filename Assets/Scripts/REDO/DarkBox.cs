@@ -3,10 +3,10 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// эту хрень можно вообще удалить так как это класс бомбы уже
 public class DarkBox : MonoBehaviour
 {
-    private float Radius = 7f;
+    private float Radius = 10f;
     private float Force = 700f;
 
     private bool explosionDone;
@@ -28,10 +28,11 @@ public class DarkBox : MonoBehaviour
         for (int i = 0; i < overlappedColliders.Length; i++)
         {
             Rigidbody rigidbody = overlappedColliders[i].attachedRigidbody;
+            if (overlappedColliders[i].TryGetComponent(out PlayerMove playerMove)) playerMove.TryRocketJump(transform.position);
             if (rigidbody)
             {
                 rigidbody.AddExplosionForce(Force, transform.position, Radius);
-
+                
                 Explosion explosion = rigidbody.GetComponent<Explosion>();
                 if (explosion)
                 {
@@ -42,9 +43,10 @@ public class DarkBox : MonoBehaviour
                         
                     }
                 }
+                // этот класс вообще только у одбного префаба есть (деревянные доски)
                 if (rigidbody.TryGetComponent(out Breakable breakble)) breakble.Break(11, transform.position, Force/2f, Radius/2f);
-
             }
+
 
         }
 
@@ -69,10 +71,11 @@ public class DarkBox : MonoBehaviour
         switch (collision.gameObject.layer)
         {
             case 0: //default
-                //Explode();
+                Explode();
                 break;
 
             default:
+                Explode();
                 break;
         }
     }

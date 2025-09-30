@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -214,8 +215,16 @@ public class PlayerMove : MonoBehaviour
     {
         if (!isCanWallJump) return false;
         Ray ray = new Ray(transform.position, transform.forward);
-        bool flag = Physics.SphereCast(ray, characterController.radius, 1f, GroundedLayer);
+        bool flag = Physics.SphereCast(ray, characterController.radius, 0.7f, GroundedLayer);
         isCanWallJump = false;
         return flag;
+    }
+
+    //сделать проверку чтобы метод срабатывал когда игрок находится над бомбой 
+    public void TryRocketJump(Vector3 forcePosition)
+    {
+        float distance = Vector3.Distance(transform.position, forcePosition);
+        verticalVelocity = jumpForce  * 5 * (1 -(distance / 10f));
+        //Debug.Log($"fp:{forcePosition}; vv:{1 - (distance / 10f)};");
     }
 }

@@ -19,7 +19,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        UIManager.Instance.ScrapCountUpdate(scrap, maxScrap);
+        UIManager.Instance.SetScrap—ount(scrap, maxScrap);
 
         InputManager.Instance.OnUseStarted += ThrowBomb;
 
@@ -84,12 +84,12 @@ public class PlayerInventory : MonoBehaviour
     private void AddScarp(int add)
     {
         scrap = Mathf.Clamp(scrap + add, 0, maxScrap);
-        UIManager.Instance.ScrapCountUpdate(scrap, maxScrap);
+        UIManager.Instance.SetScrap—ount(scrap, maxScrap);
     }
 
     private void RemoveScarp(int rmv)
     {
         scrap -= rmv;
-        UIManager.Instance.ScrapCountUpdate(scrap, maxScrap);
+        UIManager.Instance.SetScrap—ount(scrap, maxScrap);
     }
 }

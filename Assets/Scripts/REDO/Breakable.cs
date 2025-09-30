@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
+// этот класс вообще только у одбного префаба есть (деревянные доски)
 public class Breakable : MonoBehaviour
 {
     public GameObject PartPrefab;
