@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     private TMP_Text scrapCountText;
     [SerializeField]
     private Image scrapCountImageFillable;
+    [SerializeField]
+    private Transform scrapCountParent;
 
     private Tween tweenScrapCount;
     private float scrap;
@@ -33,7 +35,7 @@ public class UIManager : MonoBehaviour
         this.scrap = scrap;
         this.maxScrap = maxScrap;
         scrapCountText.text = $"{scrap}";
-        tweenScrapCount = scrapCountText.transform.DOShakeScale(1f);
+        scrapCountParent.DOShakePosition(3f, strength: 2);
     }
 
     private void Update()
@@ -45,8 +47,6 @@ public class UIManager : MonoBehaviour
     {
         scrapCountSmoothFill = Mathf.Lerp(scrapCountSmoothFill, (scrap/maxScrap), 0.05f);
         scrapCountImageFillable.fillAmount = scrapCountSmoothFill;
-
-
     }
     private void UpdateDev()
     {

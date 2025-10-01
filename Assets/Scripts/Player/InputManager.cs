@@ -14,8 +14,9 @@ public class InputManager : MonoBehaviour
 
     public Action<int> OnSlot1;
     public Action<int> OnSlot2;
-    public Action OnUseStarted;
-    public Action OnUseCanceled;
+    public Action OnAttackStarted;
+    public Action OnAltAttackStarted;
+    public Action OnAltAttackCanceled;
     public Action OnDrop;
     public Action OnInteract;
 
@@ -29,7 +30,8 @@ public class InputManager : MonoBehaviour
     [Header("Invetory")]
     //[SerializeField] private InputActionReference slot1Action;
     //[SerializeField] private InputActionReference slot2Action;
-    [SerializeField] private InputActionReference useAction;
+    [SerializeField] private InputActionReference attackAction;
+    [SerializeField] private InputActionReference altAttackAction;
     //[SerializeField] private InputActionReference dropAction;
     [SerializeField] private InputActionReference interactAction;
 
@@ -44,7 +46,7 @@ public class InputManager : MonoBehaviour
         sprintAction.action.canceled += sprintCanceled => OnSprint?.Invoke(false);
         crouchAction.action.started += crouchStarted => OnCrouch?.Invoke();
 
-        useAction.action.started += useStarted => OnUseStarted?.Invoke();
+        attackAction.action.started += useStarted => OnAttackStarted?.Invoke();
         //useAction.action.canceled += useCanceled => OnUseCanceled?.Invoke();
         //slot1Action.action.started += slot1Started => OnSlot1?.Invoke(1);
         //slot2Action.action.started += slot2Started => OnSlot2?.Invoke(2);

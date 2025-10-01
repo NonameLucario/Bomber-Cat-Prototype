@@ -8,6 +8,7 @@ public class FlowerSpots : Interactable
     }
     public override void Interact()
     {
-        EventManager.Instance.OnTryCreateBomb?.Invoke();
+        //EventManager.Instance.OnTryCreateBomb?.Invoke();
+        EventManager.Instance.OnAddFlowers?.Invoke(5);
     }
 }

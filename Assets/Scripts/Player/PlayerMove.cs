@@ -224,7 +224,7 @@ public class PlayerMove : MonoBehaviour
     public void TryRocketJump(Vector3 forcePosition)
     {
         float distance = Vector3.Distance(transform.position, forcePosition);
-        verticalVelocity = jumpForce  * 5 * (1 -(distance / 10f));
+        verticalVelocity = jumpForce  * 2 * (1 -(distance / 10f));
         //Debug.Log($"fp:{forcePosition}; vv:{1 - (distance / 10f)};");
     }
 }

@@ -7,7 +7,8 @@ public class EventManager : MonoBehaviour
 
     public delegate bool TryCreateBombAction();
     public TryCreateBombAction OnTryCreateBomb;
-    public Action<int> OnAddScarp;
+    public Action<int> OnAddScarps;
+    public Action<int> OnAddFlowers;
 
     private void Awake()
     {

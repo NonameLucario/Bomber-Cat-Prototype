@@ -16,14 +16,20 @@ public class PlayerInventory : MonoBehaviour
     private int scrap = 0;
     [SerializeField]
     private int maxScrap = 5;
+    [Header("Flowers")]
+    [SerializeField]
+    private int flowers = 0;
+    [SerializeField]
+    private int maxFlowers = 15;
+
 
     private void Start()
     {
         UIManager.Instance.SetScrap—ount(scrap, maxScrap);
 
-        InputManager.Instance.OnUseStarted += ThrowBomb;
+        InputManager.Instance.OnAttackStarted += ThrowBomb;
 
-        EventManager.Instance.OnAddScarp += AddScarp;
+        EventManager.Instance.OnAddScarps += AddScarp;
         EventManager.Instance.OnTryCreateBomb += TryCreateBomb;
     }
     private void Update()
@@ -65,6 +71,7 @@ public class PlayerInventory : MonoBehaviour
         if (!IsEnoughScrap()) return false;
         if(isAlreadyBomb) return false;
         RemoveScarp(5);
+        RemoveScarp(3);
         GameObject objBomb = Instantiate(prefabBomb, targetFloating.position, Camera.main.transform.rotation);
         rbBomb = objBomb.GetComponent<Rigidbody>();
         objBomb.transform.parent = targetFloating;
@@ -78,7 +85,7 @@ public class PlayerInventory : MonoBehaviour
 
     private bool IsEnoughScrap()
     {
-        return scrap >= 5;
+        return scrap >= 5 && flowers >= 3;
     }
 
     private void AddScarp(int add)
@@ -88,6 +95,18 @@ public class PlayerInventory : MonoBehaviour
     }
 
     private void RemoveScarp(int rmv)
+    {
+        scrap -= rmv;
+        UIManager.Instance.SetScrap—ount(scrap, maxScrap);
+    }
+
+    private void AddFlowers(int add)
+    {
+        scrap = Mathf.Clamp(scrap + add, 0, maxScrap);
+        UIManager.Instance.SetScrap—ount(scrap, maxScrap);
+    }
+
+    private void RemoveFlowers(int rmv)
     {
         scrap -= rmv;
         UIManager.Instance.SetScrap—ount(scrap, maxScrap);

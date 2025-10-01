@@ -10,7 +10,7 @@ public class ScrapSpots : Interactable
 
     public override void Interact()
     {
-        EventManager.Instance.OnAddScarp?.Invoke(3);
+        EventManager.Instance.OnAddScarps?.Invoke(3);
         //MessageManager.instance.SendMsg("", "<i>You Pick Up 10 Scrap</i>");
     }
 }
