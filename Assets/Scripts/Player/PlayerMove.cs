@@ -129,7 +129,10 @@ public class PlayerMove : MonoBehaviour
     private void Jump()
     {
         jumpBufferTime = jumpBufferMaxTime;
-        if (!isGrounded && CanWallJump()) verticalVelocity = jumpForce;
+
+        // пока не уверен что эту миханику нужно добавлять из-за рокетджампа,
+        // вообще забываю что прыжок на по стенке есть... мб надо сделать что то с осущением от этого прыжка
+        //if (!isGrounded && CanWallJump()) verticalVelocity = jumpForce;
     }
 
     private void TryJumpWithBufferTime()

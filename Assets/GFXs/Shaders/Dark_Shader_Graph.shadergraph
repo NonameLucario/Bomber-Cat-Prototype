@@ -1661,7 +1661,7 @@
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
-        "y": 5.0
+        "y": 30.0
     },
     "m_SliderType": 0,
     "m_SliderPower": 3.0,

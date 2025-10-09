@@ -7,18 +7,38 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    [Header("Scraps UIs")]
+    [SerializeField]
+    private TMP_Text scrapsCountText;
+    [SerializeField]
+    private Image scrapsCountImageFillable;
+    [SerializeField]
+    private Transform scrapsCountParent;
 
-    [SerializeField]
-    private TMP_Text scrapCountText;
-    [SerializeField]
-    private Image scrapCountImageFillable;
-    [SerializeField]
-    private Transform scrapCountParent;
+    private Tween tweenScrapsCount;
+    private float scraps;
+    private float maxScraps;
+    private float scrapsCountSmoothFill;
 
-    private Tween tweenScrapCount;
-    private float scrap;
-    private float maxScrap;
-    private float scrapCountSmoothFill;
+    [Header("Flowers UIs")]
+    [SerializeField]
+    private TMP_Text flowersCountText;
+    [SerializeField]
+    private Image flowersCountImageFillable;
+    [SerializeField]
+    private Transform flowersCountParent;
+
+
+    private Tween tweenFlowersCount;
+    private float flowers;
+    private float maxFlowers;
+    private float flowersCountSmoothFill;
+
+    [Header("Timer UIs")]
+    [SerializeField]
+    private Image timerBombImageFillable;
+    [SerializeField]
+    private GameObject timerBombParent;
 
     [SerializeField]
     private TMP_Text devText;
@@ -30,12 +50,29 @@ public class UIManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SetScrap—ount(int scrap, int maxScrap)
+    public void SetScraps—ount(int scraps, int maxScraps)
     {  
-        this.scrap = scrap;
-        this.maxScrap = maxScrap;
-        scrapCountText.text = $"{scrap}";
-        scrapCountParent.DOShakePosition(3f, strength: 2);
+        this.scraps = scraps;
+        this.maxScraps = maxScraps;
+        scrapsCountText.text = $"{scraps}";
+        scrapsCountParent.DOShakePosition(3f, strength: 2);
+    }
+    public void SetFlowers—ount(int flowers, int maxFlowers)
+    {
+        this.flowers = flowers;
+        this.maxFlowers = maxFlowers;
+        flowersCountText.text = $"{flowers}";
+        flowersCountParent.DOShakePosition(3f, strength: 2);
+    }
+
+    public void ProcessTimerCreatBomb(float time, float maxTime)
+    {
+        timerBombImageFillable.fillAmount = time / maxTime;
+    }
+
+    public void HideTimerCrearBomb(bool flag)
+    {
+        timerBombParent.SetActive(flag);
     }
 
     private void Update()
@@ -45,8 +82,11 @@ public class UIManager : MonoBehaviour
     }
     private void Scrap—ountUpdate()
     {
-        scrapCountSmoothFill = Mathf.Lerp(scrapCountSmoothFill, (scrap/maxScrap), 0.05f);
-        scrapCountImageFillable.fillAmount = scrapCountSmoothFill;
+        scrapsCountSmoothFill = Mathf.Lerp(scrapsCountSmoothFill, (scraps/maxScraps), 0.05f);
+        scrapsCountImageFillable.fillAmount = scrapsCountSmoothFill;
+
+        flowersCountSmoothFill = Mathf.Lerp(flowersCountSmoothFill, (flowers / maxFlowers), 0.05f);
+        flowersCountImageFillable.fillAmount = flowersCountSmoothFill;
     }
     private void UpdateDev()
     {

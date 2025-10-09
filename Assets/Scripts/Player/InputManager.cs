@@ -46,7 +46,9 @@ public class InputManager : MonoBehaviour
         sprintAction.action.canceled += sprintCanceled => OnSprint?.Invoke(false);
         crouchAction.action.started += crouchStarted => OnCrouch?.Invoke();
 
-        attackAction.action.started += useStarted => OnAttackStarted?.Invoke();
+        attackAction.action.started += attackStarted => OnAttackStarted?.Invoke();
+        altAttackAction.action.started += altAttackStarted => OnAltAttackStarted?.Invoke();
+        altAttackAction.action.canceled += altAttackCanceled => OnAltAttackCanceled?.Invoke();
         //useAction.action.canceled += useCanceled => OnUseCanceled?.Invoke();
         //slot1Action.action.started += slot1Started => OnSlot1?.Invoke(1);
         //slot2Action.action.started += slot2Started => OnSlot2?.Invoke(2);
